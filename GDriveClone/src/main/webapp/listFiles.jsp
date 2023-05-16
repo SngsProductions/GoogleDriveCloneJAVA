@@ -23,6 +23,7 @@
 				<form action="<%= request.getContextPath()%>/FileController" method="get">
 					<input type="hidden" name="path" value="${path}/${folder}"/>
 					<input type = "submit" value="${folder}"/>
+				
 				</form>
 				</br>
 	</c:forEach>
