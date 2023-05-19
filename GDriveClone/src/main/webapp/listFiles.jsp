@@ -25,13 +25,43 @@
 					<input type = "submit" value="${folder}"/>
 				
 				</form>
+				
+			<c:url value = "/FolderController" var="deleteurl">
+				<c:param name ="path" value="${path}"></c:param>
+				<c:param name ="action" value="delete"></c:param>
+				<c:param name ="folder" value="${folder}"></c:param>
+				</c:url>
+				<a href ="${deleteurl}">Delete Folder</a>
 				</br>
 	</c:forEach>
+	</br>
+
+	<form action="<%= request.getContextPath()%>/FolderController" method="get">
+		<input type ="hidden" name="path" value="${path}"/>
+		<input type ="hidden" name="action" value="create"/>
+		<input type ="text" name="folder" placeholder="Enter your folder name"/> 
+		<input type ="submit" value="Create Folder"/>
+	</form>
 	
 	<h1>=================================================</h1>
 	<h1>List of files</h1>
 	<c:forEach items = "${files}" var="file">
-		<a href ="">${file}</a>
+		<c:url value = "/DownloadController" var="downloadurl">
+		<c:param name="path" value="${path}"></c:param>
+		<c:param name ="file" value="${file}"></c:param>
+		</c:url>
+		<a href ="${downloadurl}">${file}</a>
+		</br>
 	</c:forEach>
+	</br>
+	</br>
+	<c:url value="/UploadController" var="uploadurl">
+		<c:param name="path" value = "${path}"></c:param>
+	</c:url>
+	<form action = "${uploadurl}" method="post" enctype="multipart/form-data">
+		Select files :: <input type = "file" name= "files" multiple/>
+		<input type="submit" value="Upload Files"/>
+	</form>
+	
 </body>
 </html>
